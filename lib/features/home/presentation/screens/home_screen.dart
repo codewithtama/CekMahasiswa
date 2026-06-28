@@ -494,7 +494,7 @@ class _ConsentOverlay extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Sesuai UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP), kami memerlukan izin Anda untuk memproses permintaan data publik dari server PDDikti.',
+                        'Sesuai UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP), kami memerlukan izin Anda untuk memproses permintaan data publik.',
                         textAlign: TextAlign.center,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
@@ -505,7 +505,7 @@ class _ConsentOverlay extends StatelessWidget {
                       const _PermissionTile(
                         icon: Icons.wifi,
                         title: 'Akses Jaringan & Internet',
-                        subtitle: 'Diperlukan untuk menghubungkan aplikasi ke database PDDikti.',
+                        subtitle: 'Diperlukan untuk menghubungkan aplikasi ke server database.',
                       ),
                       const SizedBox(height: 18),
                       const _PermissionTile(

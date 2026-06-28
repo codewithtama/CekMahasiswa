@@ -137,15 +137,7 @@ class SettingsScreen extends ConsumerWidget {
           const _SectionLabel('Tentang Aplikasi'),
           _SettingsCard(
             children: [
-              _SettingsTile(
-                icon: Icons.account_balance_outlined,
-                iconColor: Colors.teal.shade500,
-                title: 'Sumber Data',
-                subtitle: 'PDDikti – Kemdiktisaintek RI',
-                trailing: null,
-                onTap: null,
-              ),
-              const _Divider(),
+
               _SettingsTile(
                 icon: Icons.tag,
                 iconColor: Colors.purple.shade400,
@@ -198,11 +190,7 @@ class SettingsScreen extends ConsumerWidget {
                   'PDDikti Explorer',
                   style: TextStyle(color: theme.colorScheme.onSurface.withValues(alpha: 0.3), fontSize: 11, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  'Data bersumber dari pddikti.kemdiktisaintek.go.id',
-                  style: TextStyle(color: theme.colorScheme.onSurface.withValues(alpha: 0.25), fontSize: 9),
-                ),
+
               ],
             ),
           ),

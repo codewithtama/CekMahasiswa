@@ -173,7 +173,7 @@ class ShareHelper {
                     ),
                     pw.SizedBox(height: 4),
                     pw.Text(
-                      'Data ini diperoleh dari server pddikti.kemdiktisaintek.go.id secara real-time melalui aplikasi PDDikti Explorer. Laporan ini bersifat informatif dan bukan merupakan bukti kelulusan atau keabsahan akademik hukum yang sah tanpa validasi langsung dari pihak perguruan tinggi bersangkutan atau kementerian terkait.',
+                      'Data ini diperoleh secara real-time. Laporan ini bersifat informatif dan bukan merupakan bukti kelulusan atau keabsahan akademik hukum yang sah tanpa validasi langsung dari pihak perguruan tinggi bersangkutan atau kementerian terkait.',
                       style: pw.TextStyle(font: font, fontSize: 8, color: PdfColors.grey600, height: 1.3),
                     ),
                   ],
@@ -440,7 +440,7 @@ class ShareHelper {
                     ),
                     pw.SizedBox(height: 4),
                     pw.Text(
-                      'Data ini diperoleh dari server pddikti.kemdiktisaintek.go.id secara real-time melalui aplikasi PDDikti Explorer. Laporan ini bersifat informatif dan bukan merupakan surat keterangan mengajar resmi hukum yang sah tanpa validasi langsung dari pihak perguruan tinggi bersangkutan atau kementerian terkait.',
+                      'Data ini diperoleh secara real-time. Laporan ini bersifat informatif dan bukan merupakan surat keterangan mengajar resmi hukum yang sah tanpa validasi langsung dari pihak perguruan tinggi bersangkutan atau kementerian terkait.',
                       style: pw.TextStyle(font: font, fontSize: 8, color: PdfColors.grey600, height: 1.3),
                     ),
                   ],

@@ -1,6 +1,6 @@
 # PDDikti Explorer (CekMahasiswa) 🎓
 
-Aplikasi mobile Flutter modern yang dirancang untuk mencari dan melihat informasi detail dari data pendidikan tinggi di Indonesia, bersumber langsung dari **PDDIKTI (Pangkalan Data Pendidikan Tinggi) Kemdikbud API**.
+Aplikasi mobile Flutter modern yang dirancang untuk mencari dan melihat informasi detail dari data pendidikan tinggi di Indonesia.
 
 ---
 
