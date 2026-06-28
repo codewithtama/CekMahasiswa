@@ -185,6 +185,11 @@ class SettingsScreen extends ConsumerWidget {
 
           const SizedBox(height: 32),
 
+          // ─── Brand Showcase ───
+          const _BrandShowcase(),
+
+          const SizedBox(height: 32),
+
           // ─── Footer ───
           Center(
             child: Column(
@@ -392,3 +397,93 @@ class _CountBadge extends StatelessWidget {
         ),
       );
 }
+
+// ─── Brand Showcase Widget ──────────────────────────────────────────
+
+class _BrandShowcase extends StatelessWidget {
+  const _BrandShowcase();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _SectionLabel('Didukung Oleh'),
+        Card(
+          margin: EdgeInsets.zero,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: theme.dividerColor.withValues(alpha: 0.08),
+              width: 1,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _BrandLogoItem(
+                  imagePath: 'assets/images/google.png',
+                  label: 'Google',
+                  height: 28,
+                ),
+                _BrandLogoItem(
+                  imagePath: 'assets/images/github.png',
+                  label: 'GitHub',
+                  height: 28,
+                  imageColor: isDark ? Colors.white : Colors.black87,
+                ),
+                _BrandLogoItem(
+                  imagePath: 'assets/images/android.png',
+                  label: 'Android',
+                  height: 28,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _BrandLogoItem extends StatelessWidget {
+  final String imagePath;
+  final String label;
+  final double height;
+  final Color? imageColor;
+
+  const _BrandLogoItem({
+    required this.imagePath,
+    required this.label,
+    required this.height,
+    this.imageColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: label,
+      child: Image.asset(
+        imagePath,
+        height: height,
+        color: imageColor,
+        errorBuilder: (context, error, stackTrace) {
+          return Text(
+            label,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
