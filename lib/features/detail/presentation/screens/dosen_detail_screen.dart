@@ -29,16 +29,24 @@ class DosenDetailScreen extends ConsumerWidget {
               return IconButton(
                 icon: const Icon(Icons.share_outlined),
                 onPressed: () {
-                  final eduList = studyAsync.when(
+                  final List<dynamic> eduList = studyAsync.when<List<dynamic>>(
                     data: (js) {
-                      const field = 'riwayat_pendidikan';
-                      return js['data']?[field] as List? ?? js['data'] as List? ?? [];
+                      final rawData = js['data'];
+                      if (rawData is List) {
+                        return rawData;
+                      } else if (rawData is Map) {
+                        return rawData['riwayat_pendidikan'] as List? ?? [];
+                      }
+                      return [];
                     },
                     loading: () => [],
                     error: (_, __) => [],
                   );
-                  final teachingList = teachingAsync.when(
-                    data: (js) => js['data'] as List? ?? [],
+                  final List<dynamic> teachingList = teachingAsync.when<List<dynamic>>(
+                    data: (js) {
+                      final rawData = js['data'];
+                      return rawData is List ? rawData : [];
+                    },
                     loading: () => [],
                     error: (_, __) => [],
                   );
@@ -72,7 +80,9 @@ class DosenDetailScreen extends ConsumerWidget {
                 CircleAvatar(
                   radius: 32,
                   child: Text(
-                    (data['nama_dosen']?.toString() ?? '?')[0].toUpperCase(),
+                    (data['nama_dosen']?.toString().isNotEmpty == true)
+                        ? data['nama_dosen'].toString()[0].toUpperCase()
+                        : '?',
                     style: const TextStyle(fontSize: 24),
                   ),
                 ),
@@ -187,7 +197,10 @@ class _HistorySection extends StatelessWidget {
         loading: () => const LinearProgressIndicator(),
         error: (_, __) => const SizedBox(),
         data: (json) {
-          final list = json['data']?[field] as List? ?? json['data'] as List? ?? [];
+          final rawData = json['data'];
+          final List<dynamic> list = rawData is List
+              ? rawData
+              : (rawData is Map ? (rawData[field] as List? ?? []) : []);
           if (list.isEmpty) return const SizedBox();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,7 +273,8 @@ class _TeachingSection extends StatelessWidget {
         loading: () => const LinearProgressIndicator(),
         error: (_, __) => const SizedBox(),
         data: (json) {
-          final list = json['data'] as List? ?? [];
+          final rawData = json['data'];
+          final List<dynamic> list = rawData is List ? rawData : [];
           if (list.isEmpty) return const SizedBox();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,7 +329,8 @@ class _PortfolioSection extends StatelessWidget {
       ),
       error: (err, _) => const SizedBox.shrink(),
       data: (json) {
-        final list = json['data'] as List? ?? [];
+        final rawData = json['data'];
+        final List<dynamic> list = rawData is List ? rawData : [];
         if (list.isEmpty) return const SizedBox.shrink();
 
         return Card(
