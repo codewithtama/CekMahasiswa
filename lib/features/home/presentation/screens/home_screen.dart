@@ -57,37 +57,8 @@ class HomeScreen extends ConsumerWidget {
                 
                 // AppBar Header
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: theme.colorScheme.primary.withValues(alpha: 0.15),
-                          width: 0.5,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Color(0xFF0D9488),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            'ONLINE DATABASE',
-                            style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.0,
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     IconButton.filledTonal(
                       icon: const Icon(Icons.settings_outlined, size: 20),
                       onPressed: () => context.push('/settings'),
@@ -102,6 +73,32 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 
                 const SizedBox(height: 32),
+                
+                // Pirate Logo Brand Avatar
+                Row(
+                  children: [
+                    Container(
+                      width: 56,
+                      height: 56,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                        border: Border.all(
+                          color: theme.colorScheme.primary.withValues(alpha: 0.2),
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Image.asset(
+                          'assets/images/pirate_logo.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
                 
                 // Brand Titles
                 Column(
@@ -478,10 +475,11 @@ class _ConsentOverlay extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: Icon(
-                            Icons.shield_outlined,
-                            size: 56,
-                            color: theme.colorScheme.primary,
+                          child: Image.asset(
+                            'assets/images/pirate_logo.png',
+                            width: 64,
+                            height: 64,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),

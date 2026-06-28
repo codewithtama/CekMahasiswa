@@ -427,7 +427,7 @@ class _BrandShowcase extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _BrandLogoItem(
+                const _BrandLogoItem(
                   imagePath: 'assets/images/google.png',
                   label: 'Google',
                   height: 28,
@@ -438,7 +438,7 @@ class _BrandShowcase extends StatelessWidget {
                   height: 28,
                   imageColor: isDark ? Colors.white : Colors.black87,
                 ),
-                _BrandLogoItem(
+                const _BrandLogoItem(
                   imagePath: 'assets/images/android.png',
                   label: 'Android',
                   height: 28,
