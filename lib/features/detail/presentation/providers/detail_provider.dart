@@ -50,6 +50,22 @@ final dosenTeachingHistoryProvider = FutureProvider.autoDispose.family<Map<Strin
   (ref, id) => ref.watch(detailRepositoryProvider).getDosenTeachingHistory(id),
 );
 
+final dosenPenelitianProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
+  (ref, id) => ref.watch(detailRepositoryProvider).getDosenPenelitian(id),
+);
+
+final dosenPengabdianProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
+  (ref, id) => ref.watch(detailRepositoryProvider).getDosenPengabdian(id),
+);
+
+final dosenKaryaProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
+  (ref, id) => ref.watch(detailRepositoryProvider).getDosenKarya(id),
+);
+
+final dosenPatenProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
+  (ref, id) => ref.watch(detailRepositoryProvider).getDosenPaten(id),
+);
+
 final mhsDetailProvider = FutureProvider.autoDispose.family<Map<String, dynamic>, String>(
   (ref, id) => ref.watch(detailRepositoryProvider).getMhsDetail(id),
 );

@@ -13,6 +13,10 @@ class DosenDetailScreen extends ConsumerWidget {
     final profileAsync = ref.watch(dosenProfileProvider(idDosen));
     final studyAsync = ref.watch(dosenStudyHistoryProvider(idDosen));
     final teachingAsync = ref.watch(dosenTeachingHistoryProvider(idDosen));
+    final penelitianAsync = ref.watch(dosenPenelitianProvider(idDosen));
+    final pengabdianAsync = ref.watch(dosenPengabdianProvider(idDosen));
+    final karyaAsync = ref.watch(dosenKaryaProvider(idDosen));
+    final patenAsync = ref.watch(dosenPatenProvider(idDosen));
 
     return Scaffold(
       appBar: AppBar(
@@ -125,6 +129,27 @@ class DosenDetailScreen extends ConsumerWidget {
               _HistorySection(title: 'Riwayat Pendidikan', asyncValue: studyAsync, field: 'riwayat_pendidikan'),
               const SizedBox(height: 12),
               _TeachingSection(asyncValue: teachingAsync),
+              const SizedBox(height: 12),
+              _PortfolioSection(
+                title: 'Penelitian',
+                icon: Icons.science_outlined,
+                asyncValue: penelitianAsync,
+              ),
+              _PortfolioSection(
+                title: 'Pengabdian Masyarakat',
+                icon: Icons.people_outline,
+                asyncValue: pengabdianAsync,
+              ),
+              _PortfolioSection(
+                title: 'Karya',
+                icon: Icons.auto_stories_outlined,
+                asyncValue: karyaAsync,
+              ),
+              _PortfolioSection(
+                title: 'Paten',
+                icon: Icons.gavel_outlined,
+                asyncValue: patenAsync,
+              ),
             ],
           );
         },
@@ -260,4 +285,116 @@ class _TeachingSection extends StatelessWidget {
           );
         },
       );
+}
+
+class _PortfolioSection extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final AsyncValue<Map<String, dynamic>> asyncValue;
+
+  const _PortfolioSection({
+    required this.title,
+    required this.icon,
+    required this.asyncValue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return asyncValue.when(
+      loading: () => const Card(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Center(
+            child: SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        ),
+      ),
+      error: (err, _) => const SizedBox.shrink(),
+      data: (json) {
+        final list = json['data'] as List? ?? [];
+        if (list.isEmpty) return const SizedBox.shrink();
+
+        return Card(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              dividerColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+            child: ExpansionTile(
+              leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
+              title: Text(
+                '$title (${list.length})',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              childrenPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              expandedAlignment: Alignment.topLeft,
+              children: [
+                const Divider(height: 1),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: list.length,
+                  separatorBuilder: (context, index) => const Divider(height: 8),
+                  itemBuilder: (context, index) {
+                    final item = list[index];
+                    if (item is! Map) return ListTile(title: Text(item.toString()));
+                    final judul = item['judul_kegiatan']?.toString() ?? '-';
+                    final jenis = item['jenis_kegiatan']?.toString() ?? '';
+                    final tahun = item['tahun_kegiatan']?.toString() ?? '';
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            judul,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              height: 1.3,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (jenis.isNotEmpty)
+                                Expanded(
+                                  child: Text(
+                                    jenis,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              if (tahun.isNotEmpty)
+                                Text(
+                                  'Tahun: $tahun',
+                                  style: const TextStyle(fontSize: 11, color: Colors.grey),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

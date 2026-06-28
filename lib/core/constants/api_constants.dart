@@ -27,6 +27,9 @@ class ApiConstants {
   static const String dosenStudyHistory = '/dosen/study-history';
   static const String dosenTeachingHistory = '/dosen/teaching-history';
   static const String dosenPenelitian = '/dosen/portofolio/penelitian';
+  static const String dosenPengabdian = '/dosen/portofolio/pengabdian';
+  static const String dosenKarya = '/dosen/portofolio/karya';
+  static const String dosenPaten = '/dosen/portofolio/paten';
 
   static const String mhsDetail = '/detail/mhs';
 

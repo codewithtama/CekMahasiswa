@@ -38,6 +38,18 @@ class DetailRepository {
   Future<Map<String, dynamic>> getDosenTeachingHistory(String id) async =>
       _client.get('${ApiConstants.dosenTeachingHistory}/$id');
 
+  Future<Map<String, dynamic>> getDosenPenelitian(String id) async =>
+      _client.get('${ApiConstants.dosenPenelitian}/$id');
+
+  Future<Map<String, dynamic>> getDosenPengabdian(String id) async =>
+      _client.get('${ApiConstants.dosenPengabdian}/$id');
+
+  Future<Map<String, dynamic>> getDosenKarya(String id) async =>
+      _client.get('${ApiConstants.dosenKarya}/$id');
+
+  Future<Map<String, dynamic>> getDosenPaten(String id) async =>
+      _client.get('${ApiConstants.dosenPaten}/$id');
+
   Future<Map<String, dynamic>> getMhsDetail(String id) async =>
       _client.get('${ApiConstants.mhsDetail}/$id');
 }
