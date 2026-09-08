@@ -20,8 +20,8 @@ class ApiConstants {
 
   static const String prodiDetail = '/prodi/detail';
   static const String prodiDesc = '/prodi/desc';
-  static const String prodiNumStudentsLecturers = '/prodi/desc';
-  static const String prodiBiayaKuliah = '/prodi/desc';
+  static const String prodiNumStudentsLecturers = '/prodi/num-students-lecturers';
+  static const String prodiBiayaKuliah = '/prodi/cost-range';
 
   static const String dosenProfile = '/dosen/profile';
   static const String dosenStudyHistory = '/dosen/study-history';

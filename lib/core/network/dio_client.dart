@@ -6,7 +6,12 @@ class DioClient {
   late final Dio _dio;
   String _currentBaseUrl = ApiConstants.primaryBaseUrl;
 
-  DioClient() {
+  DioClient({Dio? dio}) {
+    if (dio != null) {
+      _dio = dio;
+      return;
+    }
+
     _dio = Dio(BaseOptions(
       baseUrl: _currentBaseUrl,
       connectTimeout: const Duration(milliseconds: ApiConstants.connectTimeout),
@@ -57,8 +62,20 @@ class DioClient {
         );
       }
       
-      // Wrap response data in a 'data' key to keep consistency with the models & screens
-      return {'data': response.data};
+      final raw = response.data;
+      if (raw is Map<String, dynamic>) {
+        if (raw.containsKey('data')) {
+          return raw;
+        }
+        return {'data': raw};
+      } else if (raw is Map) {
+        final casted = Map<String, dynamic>.from(raw);
+        if (casted.containsKey('data')) {
+          return casted;
+        }
+        return {'data': casted};
+      }
+      return {'data': raw};
     } on DioException catch (e) {
       throw ApiException.fromDioException(e);
     }
